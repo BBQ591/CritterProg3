@@ -1,0 +1,19 @@
+Test1
+ifenemy 0 6
+ifempty 0 13
+ifangle 90 180 13
+left
+go 1
+ifhungry 9
+right
+go 1
+eat
+go 1
+right
+go 1
+hop
+go 1
+
+
+
+

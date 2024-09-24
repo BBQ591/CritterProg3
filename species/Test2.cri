@@ -1,0 +1,22 @@
+Test2
+ifempty 0 7
+ifally 0 9
+ifenemy 0 11
+ifwall 0 5
+left
+go 1
+hop
+go 1
+right
+go 1
+ifrandom 14
+infect
+go 1
+ifstarving 17
+right
+go 1
+eat
+go 1
+
+dfhfgd
+
