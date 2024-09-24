@@ -24,83 +24,83 @@ import java.lang.reflect.Method;
 public class Interpreter implements CritterInterpreter {
 
 
-	public static HashMap<String, HashMap<Integer, ArrayList<Integer>>> allPaths = new HashMap<>();
-	private boolean isValidPath(ArrayList<Integer> path, String name) {
-		for (int i = 0; i < path.size()-1; i++) {
-			if (!allPaths.containsKey(name) && allPaths.get(name).get(path.get(i)).contains(path.get(i+1))) {
-				return false;
-			}
-		}
-		return true;
-	}
-	private void createTrees() {
-		allPaths.put("Rover", new HashMap<>());
-		allPaths.get("Rover").put(0, new ArrayList<>());
-		allPaths.get("Rover").get(0).add(1);
-		allPaths.get("Rover").get(0).add(9);
-		//if hungry
-		allPaths.get("Rover").put(9, new ArrayList<>());
-		allPaths.get("Rover").get(9).add(10);
-		allPaths.get("Rover").get(9).add(12);
-		//ifempty
-		allPaths.get("Rover").put(1, new ArrayList<>());
-		allPaths.get("Rover").get(1).add(2);
-		allPaths.get("Rover").get(1).add(7);
-		//ifrandom
-		allPaths.get("Rover").put(2, new ArrayList<>());
-		allPaths.get("Rover").get(2).add(5);
-		allPaths.get("Rover").get(2).add(3);
-
-
-
-
-		allPaths.put("Test2", new HashMap<>());
-		allPaths.get("Test2").put(0, new ArrayList<>());
-		allPaths.get("Test2").get(0).add(1);
-		allPaths.get("Test2").get(0).add(6);
-		//if hungry
-		allPaths.get("Test2").put(1, new ArrayList<>());
-		allPaths.get("Test2").get(1).add(2);
-		allPaths.get("Test2").get(1).add(8);
-		//ifempty
-		allPaths.get("Test2").put(2, new ArrayList<>());
-		allPaths.get("Test2").get(2).add(10);
-		allPaths.get("Test2").get(2).add(3);
-		//ifrandom
-		allPaths.get("Test2").put(3, new ArrayList<>());
-		allPaths.get("Test2").get(3).add(4);
-		//ifempty
-		allPaths.get("Test2").put(10, new ArrayList<>());
-		allPaths.get("Test2").get(10).add(11);
-		allPaths.get("Test2").get(10).add(13);
-		//jdklsfalkaf;ds
-		allPaths.get("Test2").put(13, new ArrayList<>());
-		allPaths.get("Test2").get(13).add(14);
-		allPaths.get("Test2").get(13).add(16);
-
-
-
-
-		allPaths.put("Test1", new HashMap<>());
-		allPaths.get("Test1").put(0, new ArrayList<>());
-		allPaths.get("Test1").get(0).add(1);
-		allPaths.get("Test1").get(0).add(5);
-		//if hungry
-		allPaths.get("Test1").put(1, new ArrayList<>());
-		allPaths.get("Test1").get(1).add(2);
-		allPaths.get("Test1").get(1).add(12);
-		//ifempty
-		allPaths.get("Test1").put(2, new ArrayList<>());
-		allPaths.get("Test1").get(2).add(10);
-		allPaths.get("Test1").get(2).add(3);
-		//ifrandom
-		allPaths.get("Test1").put(5, new ArrayList<>());
-		allPaths.get("Test1").get(5).add(6);
-		allPaths.get("Test1").get(5).add(8);
-	}
-
-
-	public static Set<String> testedCommands = new HashSet<>();
+//	public static HashMap<String, HashMap<Integer, ArrayList<Integer>>> allPaths = new HashMap<>();
+//	private boolean isValidPath(ArrayList<Integer> path, String name) {
+//		for (int i = 0; i < path.size()-1; i++) {
+//			if (!allPaths.containsKey(name) && allPaths.get(name).get(path.get(i)).contains(path.get(i+1))) {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
+//	private void createTrees() {
+//		allPaths.put("Rover", new HashMap<>());
+//		allPaths.get("Rover").put(0, new ArrayList<>());
+//		allPaths.get("Rover").get(0).add(1);
+//		allPaths.get("Rover").get(0).add(9);
+//		//if hungry
+//		allPaths.get("Rover").put(9, new ArrayList<>());
+//		allPaths.get("Rover").get(9).add(10);
+//		allPaths.get("Rover").get(9).add(12);
+//		//ifempty
+//		allPaths.get("Rover").put(1, new ArrayList<>());
+//		allPaths.get("Rover").get(1).add(2);
+//		allPaths.get("Rover").get(1).add(7);
+//		//ifrandom
+//		allPaths.get("Rover").put(2, new ArrayList<>());
+//		allPaths.get("Rover").get(2).add(5);
+//		allPaths.get("Rover").get(2).add(3);
+//
+//
+//
+//
+//		allPaths.put("Test2", new HashMap<>());
+//		allPaths.get("Test2").put(0, new ArrayList<>());
+//		allPaths.get("Test2").get(0).add(1);
+//		allPaths.get("Test2").get(0).add(6);
+//		//if hungry
+//		allPaths.get("Test2").put(1, new ArrayList<>());
+//		allPaths.get("Test2").get(1).add(2);
+//		allPaths.get("Test2").get(1).add(8);
+//		//ifempty
+//		allPaths.get("Test2").put(2, new ArrayList<>());
+//		allPaths.get("Test2").get(2).add(10);
+//		allPaths.get("Test2").get(2).add(3);
+//		//ifrandom
+//		allPaths.get("Test2").put(3, new ArrayList<>());
+//		allPaths.get("Test2").get(3).add(4);
+//		//ifempty
+//		allPaths.get("Test2").put(10, new ArrayList<>());
+//		allPaths.get("Test2").get(10).add(11);
+//		allPaths.get("Test2").get(10).add(13);
+//		//jdklsfalkaf;ds
+//		allPaths.get("Test2").put(13, new ArrayList<>());
+//		allPaths.get("Test2").get(13).add(14);
+//		allPaths.get("Test2").get(13).add(16);
+//
+//
+//
+//
+//		allPaths.put("Test1", new HashMap<>());
+//		allPaths.get("Test1").put(0, new ArrayList<>());
+//		allPaths.get("Test1").get(0).add(1);
+//		allPaths.get("Test1").get(0).add(5);
+//		//if hungry
+//		allPaths.get("Test1").put(1, new ArrayList<>());
+//		allPaths.get("Test1").get(1).add(2);
+//		allPaths.get("Test1").get(1).add(12);
+//		//ifempty
+//		allPaths.get("Test1").put(2, new ArrayList<>());
+//		allPaths.get("Test1").get(2).add(10);
+//		allPaths.get("Test1").get(2).add(3);
+//		//ifrandom
+//		allPaths.get("Test1").put(5, new ArrayList<>());
+//		allPaths.get("Test1").get(5).add(6);
+//		allPaths.get("Test1").get(5).add(8);
+//	}
+//
+//
+//	public static Set<String> testedCommands = new HashSet<>();
 
 	private boolean isInt(String integer) {
 		try {
@@ -346,9 +346,8 @@ public class Interpreter implements CritterInterpreter {
 
 
 	public void executeCritter(Critter c) {
-		createTrees();
+//		createTrees();
 		ArrayList<ArrayList<String>> behaviors = new ArrayList<>(c.getCode());
-		ArrayList<Integer> allCommands = new ArrayList<>();
 		int currStep = c.getNextCodeLine() -1;
 		if(currStep >= behaviors.size()) {
 			System.err.println("critter instructions point to invalid line");
@@ -358,7 +357,6 @@ public class Interpreter implements CritterInterpreter {
 
 		while(!currBehavior.get(0).equals("hop") && !currBehavior.get(0).equals("left") && !currBehavior.get(0).equals("right") && !currBehavior.get(0).equals("eat") && !currBehavior.get(0).equals("infect") ) {
 
-			allCommands.add(currStep);
 			if(currBehavior.get(0).equals("go") && currBehavior.size() == 2) {
 				currStep = go(c, currBehavior, currStep);
 			}
@@ -457,19 +455,18 @@ public class Interpreter implements CritterInterpreter {
 			}
 			currBehavior = behaviors.get(currStep);
 		}
-		allCommands.add(currStep);
-		if (!isValidPath(allCommands, behaviors.get(behaviors.size()-1).get(0))) {
-			System.err.println("critter instructions point to invalid line");
-			return;
-		}
-		else {
-			for (int i = 0; i < allCommands.size(); i++) {
-				testedCommands.add(behaviors.get(allCommands.get(i)).get(0));
-			}
-		}
-		if (testedCommands.size() == 14) {
-			System.out.println("reached all commands");
-		}
+//		if (!isValidPath(allCommands, behaviors.get(behaviors.size()-1).get(0))) {
+//			System.err.println("critter instructions point to invalid line");
+//			return;
+//		}
+//		else {
+//			for (int i = 0; i < allCommands.size(); i++) {
+//				testedCommands.add(behaviors.get(allCommands.get(i)).get(0));
+//			}
+//		}
+//		if (testedCommands.size() == 14) {
+//			System.out.println("reached all commands");
+//		}
 
 		if(currBehavior.get(0).equals("hop")) {
 			c.hop();
@@ -485,6 +482,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 		else if(currBehavior.get(0).equals("infect")) {
 			if(currBehavior.size() == 2) {
+				//make function that detects if the input is a register or not. that is the only thing that we are doing
 				if (currBehavior.get(1).charAt(0) == 'r' && isInt(currBehavior.get(1).substring(1))) {
 					c.infect(c.getReg(Integer.parseInt(currBehavior.get(1).substring(1))));
 				}
@@ -522,7 +520,7 @@ public class Interpreter implements CritterInterpreter {
 				currLine = reader.readLine();
 			}
 			reader.close();
-			critterBehavior.add(new ArrayList<>(Arrays.asList(name)));
+//			critterBehavior.add(new ArrayList<>(Arrays.asList(name)));
 			return new CritterSpecies(name, critterBehavior);
 
 		}
