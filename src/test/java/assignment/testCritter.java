@@ -2,8 +2,13 @@ package assignment;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 
 
 public class testCritter {
@@ -344,5 +349,29 @@ public class testCritter {
         myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifempty", String.valueOf(myCritter.getBearing()), "r3")));
         indexStep = myInterpreter.ifempty(myCritter, myCritter.getBehaviors().get(3), 3);
         Assert.assertEquals(4, indexStep);
+    }
+
+
+    @Test
+    public void testLoadCritter() {
+        String fileName = System.getProperty("user.dir")+"/species/TheGOATCritter.cri";
+        Interpreter myInterpreter = new Interpreter();
+        assertThrows(IOException.class, () -> {
+            // Call the method that should throw the IOException
+            myInterpreter.loadSpecies(fileName);
+        });
+        //should be a directory that works
+        String fileName2 = System.getProperty("user.dir")+"/species/Food.cri";
+        try {
+            CritterSpecies myCritterSpecies = myInterpreter.loadSpecies(fileName2);
+            ArrayList<ArrayList<String>> foodBehavior = new ArrayList<>();
+            foodBehavior.add(new ArrayList<>(Arrays.asList("right")));
+            foodBehavior.add(new ArrayList<>(Arrays.asList("go", "1")));
+            for (int i = 0; i < myCritterSpecies.critterBehavior.size(); i++) {
+                Assert.assertEquals(foodBehavior.get(i), myCritterSpecies.critterBehavior.get(i));
+            }
+        } catch (IOException e) {
+            System.err.println("Please input a right directory for fileName2");
+        }
     }
 }

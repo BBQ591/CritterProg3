@@ -511,22 +511,16 @@ public class Interpreter implements CritterInterpreter {
 	public CritterSpecies loadSpecies(String filename) throws IOException {
 		// obviously, your code should do something
 		ArrayList<ArrayList<String>> critterBehavior = new ArrayList<>();
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(filename));
-			String name = reader.readLine();
-			String currLine = reader.readLine();
-			while (!currLine.isEmpty()) {
-				critterBehavior.add(new ArrayList<>(Arrays.asList(currLine.split(" "))));
-				currLine = reader.readLine();
-			}
-			reader.close();
+		BufferedReader reader = new BufferedReader(new FileReader(filename));
+		String name = reader.readLine();
+		String currLine = reader.readLine();
+		while (!currLine.isEmpty()) {
+			critterBehavior.add(new ArrayList<>(Arrays.asList(currLine.split(" "))));
+			currLine = reader.readLine();
+		}
+		reader.close();
 //			critterBehavior.add(new ArrayList<>(Arrays.asList(name)));
-			return new CritterSpecies(name, critterBehavior);
+		return new CritterSpecies(name, critterBehavior);
 
-		}
-		catch (FileNotFoundException e) {
-			System.err.println("File not found: " + filename);
-		}
-		return null;
 	}
 }
