@@ -2,15 +2,215 @@ package assignment;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class testCritter {
     @Test
-    public void testCritter2() {
+    public void ifgtTest() {
+        int indexStep;
+
         Interpreter myInterpreter = new Interpreter();
-        Critter myCritter = new Critter();
-        myInterpreter.executeCritter(myCritter);
-        Assert.assertEquals(5, 5);
-        System.out.println("testCritter");
+        Critter myCritter = new EachCritter();
+        myCritter.setReg(1, 15);
+        myCritter.setReg(2, 10);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifgt", "r1", "r2", "30")));
+        indexStep = myInterpreter.ifgt(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setReg(1, 5);
+        myCritter.setReg(2, 10);
+        indexStep = myInterpreter.ifgt(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(1, indexStep);
+    }
+
+
+    @Test
+    public void ifeqTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setReg(1, 10);
+        myCritter.setReg(2, 10);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifeq", "r1", "r2", "30")));
+        indexStep = myInterpreter.ifeq(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setReg(1, 5);
+        myCritter.setReg(2, 10);
+        indexStep = myInterpreter.ifeq(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(1, indexStep);
+    }
+
+
+    @Test
+    public void ifltTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setReg(1, 5);
+        myCritter.setReg(2, 10);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("iflt", "r1", "r2", "30")));
+        indexStep = myInterpreter.iflt(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setReg(1, 15);
+        myCritter.setReg(2, 10);
+        indexStep = myInterpreter.iflt(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(1, indexStep);
+    }
+
+
+    @Test
+    public void ifangleTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setBearing(1);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifangle", String.valueOf(myCritter.getBearing()),String.valueOf(1),"40")));
+        indexStep = myInterpreter.ifangle(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(39, indexStep);
+
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifangle", String.valueOf(myCritter.getBearing()),String.valueOf(5),"40")));
+        indexStep = myInterpreter.ifangle(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
+    }
+
+
+    @Test
+    public void ifwallTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setBearing(1);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifwall", String.valueOf(myCritter.getBearing()),"40")));
+        indexStep = myInterpreter.ifwall(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(39, indexStep);
+
+        myCritter.setBearing(3);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifwall", String.valueOf(myCritter.getBearing()),"43")));
+        indexStep = myInterpreter.ifwall(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
+    }
+
+
+    @Test
+    public void ifenemyTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setBearing(2);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifenemy", String.valueOf(myCritter.getBearing()),"40")));
+        indexStep = myInterpreter.ifenemy(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(39, indexStep);
+
+        myCritter.setBearing(3);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifenemy", String.valueOf(myCritter.getBearing()),"43")));
+        indexStep = myInterpreter.ifenemy(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
+    }
+
+    @Test
+    public void ifallyTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setBearing(3);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifally", String.valueOf(myCritter.getBearing()),"43")));
+        indexStep = myInterpreter.ifally(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(42, indexStep);
+
+        myCritter.setBearing(2);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifally", String.valueOf(myCritter.getBearing()),"43")));
+        indexStep = myInterpreter.ifally(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
+    }
+
+
+    @Test
+    public void goTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("go", "17")));
+        indexStep = myInterpreter.go(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(16, indexStep);
+    }
+
+    @Test
+    public void ifrandomTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setRandom(true);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifrandom", "20")));
+        indexStep = myInterpreter.ifrandom(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(19, indexStep);
+
+        myCritter.setRandom(false);
+        indexStep = myInterpreter.ifrandom(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(1, indexStep);
+    }
+    @Test
+    public void ifstarvingTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+
+        myCritter.setStarving(true);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifstarving", "21")));
+        indexStep = myInterpreter.ifstarving(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(20, indexStep);
+
+        myCritter.setStarving(false);
+        indexStep = myInterpreter.ifhungry(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(1, indexStep);
+    }
+
+    @Test
+    public void ifhungryTest() {
+        int indexStep;
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setHungry(true);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifhungry", "21")));
+        indexStep = myInterpreter.ifhungry(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(20, indexStep);
+
+        myCritter.setHungry(false);
+        indexStep = myInterpreter.ifhungry(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(1, indexStep);
+    }
+
+
+
+    @Test
+    public void ifEmptyTest() {
+        int indexStep;
+
+
+        Interpreter myInterpreter = new Interpreter();
+        Critter myCritter = new EachCritter();
+        myCritter.setBearing(0);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifempty", String.valueOf(myCritter.getBearing()), "23")));
+        indexStep = myInterpreter.ifempty(myCritter, myCritter.getBehaviors().get(0), 0);
+        Assert.assertEquals(22, indexStep);
+
+
+        myCritter.setBearing(2);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifempty", String.valueOf(myCritter.getBearing()), "23")));
+        indexStep = myInterpreter.ifempty(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
     }
 }

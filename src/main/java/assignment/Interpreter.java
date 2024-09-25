@@ -112,7 +112,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 	}
 
-	private int go(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int go(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(currBehavior.get(1).charAt(0) == '+' && isInt(currBehavior.get(1).substring(1))) {
 			currStep += Integer.parseInt(currBehavior.get(1).substring(1)) - 1;
 		} else if (currBehavior.get(1).charAt(0) == '-'&& isInt(currBehavior.get(1).substring(1))) {
@@ -128,7 +128,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 		return currStep;
 	}
-	private int ifrandom(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int ifrandom(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(c.ifRandom()) {
 			if (currBehavior.get(1).charAt(0) == 'r' && isInt(currBehavior.get(1).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(1).substring(1))) - 1;
@@ -145,7 +145,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 		return currStep;
 	}
-	private int ifstarving(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int ifstarving(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(c.getHungerLevel() == Critter.HungerLevel.STARVING) {
 			if (currBehavior.get(1).charAt(0) == 'r'&&isInt(currBehavior.get(1).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(1).substring(1))) - 1;
@@ -162,7 +162,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 		return currStep;
 	}
-	private int ifempty(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int ifempty(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(isInt(currBehavior.get(1))&&c.getCellContent(Integer.parseInt(currBehavior.get(1))) == 0) {
 			if (currBehavior.get(2).charAt(0) == 'r'&&isInt(currBehavior.get(2).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(2).substring(1))) - 1;
@@ -183,7 +183,7 @@ public class Interpreter implements CritterInterpreter {
 		return currStep;
 	}
 
-	private int ifhungry(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int ifhungry(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(c.getHungerLevel() == Critter.HungerLevel.HUNGRY || c.getHungerLevel() == Critter.HungerLevel.STARVING) {
 			if (currBehavior.get(1).charAt(0) == 'r'&&isInt(currBehavior.get(1).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(1).substring(1))) - 1;
@@ -200,7 +200,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 		return currStep;
 	}
-	private int ifally(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int ifally(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(isInt(currBehavior.get(1))&&c.getCellContent(Integer.parseInt(currBehavior.get(1))) == 3) {
 			if (currBehavior.get(2).charAt(0) == 'r'&&isInt(currBehavior.get(2).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(2).substring(1))) - 1;
@@ -220,7 +220,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 		return currStep;
 	}
-	private int ifenemy(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int ifenemy(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(isInt(currBehavior.get(1)) && c.getCellContent(Integer.parseInt(currBehavior.get(1))) == 2) {
 			if (currBehavior.get(2).charAt(0) == 'r'&&isInt(currBehavior.get(2).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(2).substring(1))) - 1;
@@ -240,7 +240,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 		return currStep;
 	}
-	private int ifwall(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int ifwall(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(isInt(currBehavior.get(1))&&c.getCellContent(Integer.parseInt(currBehavior.get(1))) == 1) {
 			if (isInt(currBehavior.get(2).substring(1))&&currBehavior.get(2).charAt(0) == 'r') {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(2).substring(1))) - 1;
@@ -260,7 +260,7 @@ public class Interpreter implements CritterInterpreter {
 		}
 		return currStep;
 	}
-	private int ifangle(Critter c, ArrayList<String> currBehavior, int currStep) {
+	public int ifangle(Critter c, ArrayList<String> currBehavior, int currStep) {
 		if(isInt(currBehavior.get(1))&&isInt(currBehavior.get(2))&&c.getOffAngle(Integer.parseInt(currBehavior.get(1))) == Integer.parseInt(currBehavior.get(2))) {
 			if (currBehavior.get(3).charAt(0) == 'r'&&isInt(currBehavior.get(3).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(3).substring(1))) - 1;
@@ -280,8 +280,8 @@ public class Interpreter implements CritterInterpreter {
 		}
 		return currStep;
 	}
-	private int iflt(Critter c, ArrayList<String> currBehavior, int currStep) {
-		if (isInt(currBehavior.get(1))&&isInt(currBehavior.get(2))&&c.getReg(Integer.parseInt(currBehavior.get(1))) < c.getReg(Integer.parseInt(currBehavior.get(2)))) {
+	public int iflt(Critter c, ArrayList<String> currBehavior, int currStep) {
+		if (isInt(currBehavior.get(1).substring(1))&&isInt(currBehavior.get(2).substring(1))&&c.getReg(Integer.parseInt(currBehavior.get(1).substring(1))) < c.getReg(Integer.parseInt(currBehavior.get(2).substring(1)))) {
 			if (currBehavior.get(3).charAt(0) == 'r'&&isInt(currBehavior.get(3).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(3).substring(1))) - 1;
 			}
@@ -292,7 +292,7 @@ public class Interpreter implements CritterInterpreter {
 				return -1;
 			}
 		}
-		else if (!isInt(currBehavior.get(1))|| !isInt(currBehavior.get(2))) {
+		else if (!isInt(currBehavior.get(1).substring(1))|| !isInt(currBehavior.get(2).substring(1))) {
 			return -1;
 		}
 		else {
@@ -301,8 +301,8 @@ public class Interpreter implements CritterInterpreter {
 		return currStep;
 	}
 
-	private int ifeq(Critter c, ArrayList<String> currBehavior, int currStep) {
-		if (isInt(currBehavior.get(1))&&isInt(currBehavior.get(2)) &&c.getReg(Integer.parseInt(currBehavior.get(1))) == c.getReg(Integer.parseInt(currBehavior.get(2)))) {
+	public int ifeq(Critter c, ArrayList<String> currBehavior, int currStep) {
+		if (isInt(currBehavior.get(1).substring(1))&&isInt(currBehavior.get(2).substring(1)) &&c.getReg(Integer.parseInt(currBehavior.get(1).substring(1))) == c.getReg(Integer.parseInt(currBehavior.get(2).substring(1)))) {
 			if (currBehavior.get(3).charAt(0) == 'r'&&isInt(currBehavior.get(3).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(3).substring(1))) - 1;
 			}
@@ -313,7 +313,7 @@ public class Interpreter implements CritterInterpreter {
 				return -1;
 			}
 		}
-		else if (!isInt(currBehavior.get(1))|| !isInt(currBehavior.get(2))) {
+		else if (!isInt(currBehavior.get(1).substring(1))|| !isInt(currBehavior.get(2).substring(1))) {
 			return -1;
 		}
 		else {
@@ -322,8 +322,8 @@ public class Interpreter implements CritterInterpreter {
 		return currStep;
 	}
 
-	private int ifgt(Critter c, ArrayList<String> currBehavior, int currStep) {
-		if (isInt(currBehavior.get(1))&&isInt(currBehavior.get(2)) && c.getReg(Integer.parseInt(currBehavior.get(1))) > c.getReg(Integer.parseInt(currBehavior.get(2)))) {
+	public int ifgt(Critter c, ArrayList<String> currBehavior, int currStep) {
+		if (isInt(currBehavior.get(1).substring(1))&&isInt(currBehavior.get(2).substring(1)) && c.getReg(Integer.parseInt(currBehavior.get(1).substring(1))) > c.getReg(Integer.parseInt(currBehavior.get(2).substring(1)))) {
 			if (currBehavior.get(3).charAt(0) == 'r'&&isInt(currBehavior.get(3).substring(1))) {
 				currStep = c.getReg(Integer.parseInt(currBehavior.get(3).substring(1))) - 1;
 			}
@@ -334,7 +334,7 @@ public class Interpreter implements CritterInterpreter {
 				return -1;
 			}
 		}
-		else if (!isInt(currBehavior.get(1))|| !isInt(currBehavior.get(2))) {
+		else if (!isInt(currBehavior.get(1).substring(1))|| !isInt(currBehavior.get(2).substring(1))) {
 			return -1;
 		}
 		else {
