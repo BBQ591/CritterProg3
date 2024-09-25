@@ -23,6 +23,20 @@ public class testCritter {
         myCritter.setReg(2, 10);
         indexStep = myInterpreter.ifgt(myCritter, myCritter.getBehaviors().get(0), 0);
         Assert.assertEquals(1, indexStep);
+
+        myCritter.setReg(1, 15);
+        myCritter.setReg(2, 10);
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifgt", "r1", "r2", "r3")));
+        indexStep = myInterpreter.ifgt(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(29, indexStep);
+
+
+        myCritter.setReg(1, 5);
+        myCritter.setReg(2, 10);
+        myCritter.setReg(3, 30);
+        indexStep = myInterpreter.ifgt(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
     }
 
 
@@ -42,6 +56,20 @@ public class testCritter {
         myCritter.setReg(2, 10);
         indexStep = myInterpreter.ifeq(myCritter, myCritter.getBehaviors().get(0), 0);
         Assert.assertEquals(1, indexStep);
+
+        myCritter.setReg(1, 10);
+        myCritter.setReg(2, 10);
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("fieq", "r1", "r2", "r3")));
+        indexStep = myInterpreter.ifeq(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setReg(1, 5);
+        myCritter.setReg(2, 10);
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("fieq", "r1", "r2", "r3")));
+        indexStep = myInterpreter.ifeq(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
     }
 
 
@@ -61,6 +89,19 @@ public class testCritter {
         myCritter.setReg(2, 10);
         indexStep = myInterpreter.iflt(myCritter, myCritter.getBehaviors().get(0), 0);
         Assert.assertEquals(1, indexStep);
+
+        myCritter.setReg(1, 5);
+        myCritter.setReg(2, 10);
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("iflt", "r1", "r2", "r3")));
+        indexStep = myInterpreter.iflt(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setReg(1, 20);
+        myCritter.setReg(2, 10);
+        myCritter.setReg(3, 30);
+        indexStep = myInterpreter.iflt(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
     }
 
 
@@ -78,6 +119,15 @@ public class testCritter {
         myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifangle", String.valueOf(myCritter.getBearing()),String.valueOf(5),"40")));
         indexStep = myInterpreter.ifangle(myCritter, myCritter.getBehaviors().get(1), 1);
         Assert.assertEquals(2, indexStep);
+
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifangle", String.valueOf(myCritter.getBearing()),String.valueOf(1),"r3")));
+        indexStep = myInterpreter.ifangle(myCritter, myCritter.getBehaviors().get(2), 2);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifangle", String.valueOf(myCritter.getBearing()),String.valueOf(5),"r3")));
+        indexStep = myInterpreter.ifangle(myCritter, myCritter.getBehaviors().get(3), 3);
+        Assert.assertEquals(4, indexStep);
     }
 
 
@@ -96,6 +146,18 @@ public class testCritter {
         myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifwall", String.valueOf(myCritter.getBearing()),"43")));
         indexStep = myInterpreter.ifwall(myCritter, myCritter.getBehaviors().get(1), 1);
         Assert.assertEquals(2, indexStep);
+
+
+        myCritter.setReg(3, 30);
+        myCritter.setBearing(1);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifwall", String.valueOf(myCritter.getBearing()),"r3")));
+        indexStep = myInterpreter.ifwall(myCritter, myCritter.getBehaviors().get(2), 2);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setBearing(3);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifwall", String.valueOf(myCritter.getBearing()),"r3")));
+        indexStep = myInterpreter.ifwall(myCritter, myCritter.getBehaviors().get(3), 3);
+        Assert.assertEquals(4, indexStep);
     }
 
 
@@ -114,6 +176,17 @@ public class testCritter {
         myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifenemy", String.valueOf(myCritter.getBearing()),"43")));
         indexStep = myInterpreter.ifenemy(myCritter, myCritter.getBehaviors().get(1), 1);
         Assert.assertEquals(2, indexStep);
+
+        myCritter.setReg(3, 30);
+        myCritter.setBearing(2);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifenemy", String.valueOf(myCritter.getBearing()),"r3")));
+        indexStep = myInterpreter.ifenemy(myCritter, myCritter.getBehaviors().get(2), 2);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setBearing(3);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifenemy", String.valueOf(myCritter.getBearing()),"r3")));
+        indexStep = myInterpreter.ifenemy(myCritter, myCritter.getBehaviors().get(3), 3);
+        Assert.assertEquals(4, indexStep);
     }
 
     @Test
@@ -131,6 +204,17 @@ public class testCritter {
         myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifally", String.valueOf(myCritter.getBearing()),"43")));
         indexStep = myInterpreter.ifally(myCritter, myCritter.getBehaviors().get(1), 1);
         Assert.assertEquals(2, indexStep);
+
+        myCritter.setReg(3, 30);
+        myCritter.setBearing(3);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifally", String.valueOf(myCritter.getBearing()),"r3")));
+        indexStep = myInterpreter.ifally(myCritter, myCritter.getBehaviors().get(2), 2);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setBearing(2);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifally", String.valueOf(myCritter.getBearing()),"r3")));
+        indexStep = myInterpreter.ifally(myCritter, myCritter.getBehaviors().get(3), 3);
+        Assert.assertEquals(4, indexStep);
     }
 
 
@@ -143,6 +227,11 @@ public class testCritter {
         myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("go", "17")));
         indexStep = myInterpreter.go(myCritter, myCritter.getBehaviors().get(0), 0);
         Assert.assertEquals(16, indexStep);
+
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("go", "r3")));
+        indexStep = myInterpreter.go(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(29, indexStep);
     }
 
     @Test
@@ -159,6 +248,16 @@ public class testCritter {
         myCritter.setRandom(false);
         indexStep = myInterpreter.ifrandom(myCritter, myCritter.getBehaviors().get(0), 0);
         Assert.assertEquals(1, indexStep);
+
+        myCritter.setRandom(true);
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifrandom", "r3")));
+        indexStep = myInterpreter.ifrandom(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setRandom(false);
+        indexStep = myInterpreter.ifrandom(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
     }
     @Test
     public void ifstarvingTest() {
@@ -175,6 +274,16 @@ public class testCritter {
         myCritter.setStarving(false);
         indexStep = myInterpreter.ifhungry(myCritter, myCritter.getBehaviors().get(0), 0);
         Assert.assertEquals(1, indexStep);
+
+        myCritter.setStarving(true);
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifstarving", "r3")));
+        indexStep = myInterpreter.ifstarving(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setStarving(false);
+        indexStep = myInterpreter.ifstarving(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
     }
 
     @Test
@@ -191,6 +300,17 @@ public class testCritter {
         myCritter.setHungry(false);
         indexStep = myInterpreter.ifhungry(myCritter, myCritter.getBehaviors().get(0), 0);
         Assert.assertEquals(1, indexStep);
+
+
+        myCritter.setHungry(true);
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifhungry", "r3")));
+        indexStep = myInterpreter.ifhungry(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setHungry(false);
+        indexStep = myInterpreter.ifhungry(myCritter, myCritter.getBehaviors().get(1), 1);
+        Assert.assertEquals(2, indexStep);
     }
 
 
@@ -212,5 +332,17 @@ public class testCritter {
         myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifempty", String.valueOf(myCritter.getBearing()), "23")));
         indexStep = myInterpreter.ifempty(myCritter, myCritter.getBehaviors().get(1), 1);
         Assert.assertEquals(2, indexStep);
+
+
+        myCritter.setBearing(0);
+        myCritter.setReg(3, 30);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifempty", String.valueOf(myCritter.getBearing()), "r3")));
+        indexStep = myInterpreter.ifempty(myCritter, myCritter.getBehaviors().get(2), 2);
+        Assert.assertEquals(29, indexStep);
+
+        myCritter.setBearing(2);
+        myCritter.addToBehaviors(new ArrayList<>(Arrays.asList("ifempty", String.valueOf(myCritter.getBearing()), "r3")));
+        indexStep = myInterpreter.ifempty(myCritter, myCritter.getBehaviors().get(3), 3);
+        Assert.assertEquals(4, indexStep);
     }
 }
