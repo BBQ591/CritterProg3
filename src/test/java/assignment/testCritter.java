@@ -357,7 +357,6 @@ public class testCritter {
         String fileName = System.getProperty("user.dir")+"/species/TheGOATCritter.cri";
         Interpreter myInterpreter = new Interpreter();
         assertThrows(IOException.class, () -> {
-            // Call the method that should throw the IOException
             myInterpreter.loadSpecies(fileName);
         });
         //should be a directory that works

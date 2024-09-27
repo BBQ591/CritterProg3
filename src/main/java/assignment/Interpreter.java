@@ -466,15 +466,9 @@ public class Interpreter implements CritterInterpreter {
 		//reading in input file and saving them as behaviors in the following format: [string behavior, input1, input2, ..., inputN]
 		String currLine = reader.readLine();
 		//making sure that the file isn't empty
-		try {
-			while (!currLine.isEmpty()) {
-				critterBehavior.add(new ArrayList<>(Arrays.asList(currLine.split(" "))));
-				currLine = reader.readLine();
-			}
-		}
-		catch (Exception e) {
-			System.err.println("Critter File Empty");
-			return null;
+		while (!(currLine == null) && !(currLine.isEmpty())) {
+			critterBehavior.add(new ArrayList<>(Arrays.asList(currLine.split(" "))));
+			currLine = reader.readLine();
 		}
 
 		reader.close();
