@@ -1,0 +1,18 @@
+Bumblebees
+ifenemy 0 9
+ifwall 0 4
+ifempty 0 14
+ifrandom 7
+left
+go 1
+right
+go 1
+ifhungry 12
+infect
+go 1
+eat
+go 1
+hop
+go 1
+
+Bumblebees go bzzz
